@@ -1,0 +1,74 @@
+<h1>Обновлятор три тыщи</h1>
+<div class="fields form currencyupdate">
+    <form action="?module=plugins&id=currencyupdate&action=save" method="post" id="plugins-settings-form">
+        <!--защита от межсайтовых атак-->
+        {$wa->csrf()}
+
+        <div class="field">
+            <p>
+                <table class="zebra table" style="white-space: nowrap;">
+                    <thead>
+                        <tr>
+                            <th>Валюта</th>
+                            <th>Курс</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach from=$settings key=k item=v}
+                            {if $k != 'date' && $k != 'cron'}
+                                <tr>
+                                    <td>{$k}</td>
+                                    <td>
+                                        <span id="{$k}">{$v}</span>
+                                    </td>
+                                </tr>                            
+                            {/if}
+                        {/foreach}
+                    </tbody>
+                </table>
+            </p>
+        </div>
+
+        <div class="field">
+            <div class="name">Актуальность</div>
+            <div class="value">
+                <span name="shop_currencyupdate[date]" id="date">{$settings.date}</span>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="name">Cron string</div>
+            <div class="value">
+                <span name="shop_currencyupdate[cron]" id="cron" >{$settings.cron}</span>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="value submit">
+                <input type="submit" class="button green" value="Обновить" id="saveBtn">
+                <span id="plugins-settings-form-status" style="display:none">
+                    <i style="vertical-align:middle" class="icon16 yes"></i> [`Saved`]
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('form').submit(function () {
+        $.ajax({
+            url: $('form').attr('action'),
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function (data) {
+                //console.log(data.data);
+                $.each(data.data, function(index,value) {
+                    if(index != 'message') {
+                        var id = '#' + index;
+                        $(id).text(value);
+                    }
+                });
+            }
+        });
+        return false;
+    });
+</script>
