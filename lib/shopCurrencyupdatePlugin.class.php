@@ -34,4 +34,3 @@ class shopCurrencyupdatePlugin extends shopPlugin
         return $array;
     }
 }
-

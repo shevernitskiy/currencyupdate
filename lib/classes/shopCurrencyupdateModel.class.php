@@ -4,7 +4,7 @@
  * Класс для доступа к таблице с валютами
  */
 
-class shopCurrencyupdateModel extends waModel 
+class shopCurrencyupdateModel extends waModel
 {
     protected $table = 'shop_currency';
 
@@ -12,7 +12,7 @@ class shopCurrencyupdateModel extends waModel
     {
         $out = array();
         $in = $this->getAll();
-        foreach($in as $value) {
+        foreach ($in as $value) {
             $out += array($value['code'] => $value['rate']);
         }
         return $out;
@@ -23,5 +23,5 @@ class shopCurrencyupdateModel extends waModel
         foreach ($array as $key => $value) {
             $this->updateByField('code', $key, array('rate' => $value));
         }
-    }    
+    }
 }

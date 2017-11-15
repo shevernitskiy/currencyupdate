@@ -61,8 +61,8 @@
             data: $('form').serialize(),
             success: function (data) {
                 //console.log(data.data);
-                $.each(data.data, function(index,value) {
-                    if(index != 'message') {
+                $.each(data.data, function(index, value) {
+                    if (index != 'message') {
                         var id = '#' + index;
                         $(id).text(value);
                     }

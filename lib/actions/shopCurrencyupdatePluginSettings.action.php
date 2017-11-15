@@ -13,7 +13,7 @@ class shopCurrencyupdatePluginSettingsAction extends waViewAction
         $response = $model->getCurArray();
         foreach ($response as $key => $currency) {
             if ($key != 'RUB') {
-                $settings[$key] = round($currency,4);
+                $settings[$key] = round($currency, 4);
             }
         }
         $set_model = new waAppSettingsModel();
